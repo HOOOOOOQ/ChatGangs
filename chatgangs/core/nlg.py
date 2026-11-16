@@ -45,7 +45,7 @@ OPENERS: Dict[str, Dict[str, List[str]]] = {
         "analyze_text": ["Berikut hasilnya", "Ini hasil analisisnya", "Sudah saya analisis"],
         "translate": ["Baik", "Tentu"],
         "feedback_positive": ["Terima kasih", "Wah, terima kasih", "Senang mendengarnya"],
-        "complaint": ["Maaf atas ketidaknyamanannya", "Terima kasih atas laporannya", "Saya paham"],
+        "complaint": ["Terima kasih atas laporannya", "Saya paham", "Baik, saya catat"],
         "small_talk": ["Haha", "Menarik", "Baik"],
         "question": ["Tentu", "Baik", "Ini yang saya tahu"],
         "help": ["Tentu", "Siap", "Tidak masalah"],

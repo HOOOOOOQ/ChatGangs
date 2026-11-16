@@ -84,8 +84,10 @@ RULES: List[Tuple[str, str, float]] = [
     ("capabilities", r"\b(kamu bisa apa|apa (saja )?kemampuan(mu)?|"
                      r"fitur (apa|saja)|what can you do|your (features|capabilities)|"
                      r"apa yang bisa kamu lakukan|bisa bantu apa)\b", 0.88),
+    # Naming the API is more specific than the generic "cara pakai" help
+    # phrasing, so it must outrank the help rules.
     ("api_help", r"\b(api|endpoint|rest|curl|integrasi|integrate|webhook|sdk|"
-                 r"swagger|dokumentasi api|api docs)\b", 0.72),
+                 r"swagger|dokumentasi api|api docs)\b", 0.84),
     ("pricing", r"\b(harga|harganya|biaya|gratis|free|pricing|cost|langganan|"
                 r"subscription|bayar|premium)\b", 0.75),
     ("training_help", r"\b(training|latih|melatih|fine[- ]?tun(e|ing)|dataset|"
@@ -104,12 +106,17 @@ RULES: List[Tuple[str, str, float]] = [
     ("complaint", r"\b(tidak puas|kecewa|buruk|jelek|parah|error terus|crash|"
                   r"tidak (bekerja|berfungsi|membantu)|doesn'?t work|not working|"
                   r"useless|terrible|awful|worst|kesal|marah|lambat sekali|bug)\b", 0.8),
+    # Milder service complaints ("pengiriman lambat", "barang rusak") need a
+    # lower weight so a genuine compliment still wins when it is stronger.
+    ("complaint", r"\b(lambat|telat|terlambat|rusak|macet|antre panjang|antri panjang|"
+                  r"mahal|mengecewakan|gagal|dibatalkan|salah kirim)\b", 0.66),
     ("feedback_positive", r"\b(bagus sekali|keren|mantap|sangat membantu|"
                           r"memuaskan|suka (sistem|ini|kamu)|great|awesome|"
                           r"love it|good job|nice work|well done|perfect)\b", 0.78),
 
     # --- help / question
-    ("help", r"^(help|tolong|bantu|bantu saya|saya bingung|bingung|i need help)\b", 0.82),
+    ("help", r"^(help|tolong|bantu|bantu saya|mohon bantu|bisa bantu|saya bingung|"
+             r"bingung|i need help|please help)\b", 0.82),
     ("help", r"\b(mulai dari mana|how does this work|gimana cara pakai|"
              r"where do i start|cara pakai)\b", 0.78),
     ("question", r"\b(ingin|mau|hendak) (bertanya|tanya|menanyakan)\b", 0.55),
@@ -314,6 +321,16 @@ class IntentDetector:
         return result
 
     def _fuzzy_scores(self, normalized: str, language: str) -> List[Tuple[str, float]]:
+        """Token-overlap similarity between the input and the catalogue examples.
+
+        Containment alone is misleading: a two-word example ("bagus sekali")
+        is "fully contained" in an eleven-word sentence and would score 0.85,
+        beating a genuine rule match. The score is therefore damped by how much
+        of the *input* the example explains:
+
+        ``score = overlap/|input ∪ example|`` boosted only when the example
+        covers a large share of the input tokens.
+        """
         tokens = self.stopwords.remove(normalized.split(), language)
         token_set = set(tokens)
         if not token_set:
@@ -327,8 +344,10 @@ class IntentDetector:
             if overlap == 0:
                 continue
             jaccard = overlap / len(token_set | ex_tokens)
+            input_coverage = overlap / len(token_set)
             containment = overlap / min(len(token_set), len(ex_tokens))
-            score = max(jaccard, containment * 0.85)
+            # Short examples must explain most of the input to score highly.
+            score = max(jaccard, containment * 0.85 * (0.35 + 0.65 * input_coverage))
             if score > best_per_intent.get(intent, 0.0):
                 best_per_intent[intent] = score
         return sorted(best_per_intent.items(), key=lambda kv: kv[1], reverse=True)

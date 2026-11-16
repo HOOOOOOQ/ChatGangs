@@ -16,7 +16,29 @@ Generation — semuanya diekspos lewat REST API dan antarmuka web.
 
 ---
 
-## 1. Demo cepat
+## 1. Cara pakai
+
+### Cara tercepat — satu perintah
+
+```bash
+git clone https://github.com/HOOOOOOQ/ChatGangs.git
+cd ChatGangs
+./quickstart.sh            # venv + dependensi + .env + training + server
+```
+
+`quickstart.sh` melakukan semuanya secara idempoten (aman dijalankan berulang):
+
+| Langkah | Yang terjadi |
+| --- | --- |
+| 1 | buat `.venv` bila belum ada, `pip install -r requirements-dev.txt` |
+| 2 | salin `.env.example` → `.env` **hanya jika** `.env` belum ada |
+| 3 | `python -m scripts.train --task all` (training sungguhan, ±15 s) |
+| 4 | jalankan server di `0.0.0.0:8000` |
+
+Opsi: `--no-train` (lewati training, pakai aturan/leksikon), `--test` (jalankan
+184 tes sebelum server naik), `PORT=8100 ./quickstart.sh` (port lain).
+
+### Cara manual
 
 ```bash
 # 1. instalasi
@@ -26,8 +48,24 @@ pip install -r requirements-dev.txt
 # 2. latih model (opsional tetapi disarankan — metrik nyata, ±15 detik)
 python -m scripts.train --task all
 
-# 3. jalankan
+# 3. cek dataset tanpa melatih apa pun
+python -m scripts.train --dry-run
+
+# 4. jalankan
 python -m chatgangs --host 0.0.0.0 --port 8000
+# development dengan auto-reload:
+python -m chatgangs --reload
+```
+
+> Tanpa langkah training pun API tetap berjalan (aturan + leksikon + fuzzy).
+> `GET /api/model/info` akan jujur melaporkan `trained: false`, dan
+> `POST /api/nlp/classify` mengembalikan `topic: null`.
+
+### Docker
+
+```bash
+docker compose up --build                 # http://localhost:8000
+docker compose --profile postgres up -d   # + PostgreSQL
 ```
 
 * Web client → <http://localhost:8000/>
@@ -154,14 +192,46 @@ Panduan lengkap (contoh request/response tiap endpoint) ada di
 
 ## 4. Contoh penggunaan
 
+### Lewat web client (tanpa coding)
+
+Buka <http://localhost:8000/> — tiga tab:
+
+* **Percakapan** — chat multi-giliran; tiap balasan menampilkan chip intent,
+  sentimen, dan entitas. Tombol "sesi baru" dan "hapus riwayat" tersedia.
+* **Analisis teks** — tempel teks, lihat token, entitas, sentimen,
+  klasifikasi (speech-act + topik), QA, kata kunci, dan JSON mentah.
+* **Model & sistem** — artefak model, metrik, backend tiap engine, `/api/metrics`.
+
 ### cURL
 
 ```bash
-# analisis sentimen
+# 1) percakapan biasa
+curl -X POST localhost:8000/api/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"Halo, apa saja kemampuanmu?","session_id":"demo"}'
+
+# 2) lanjutkan percakapan yang sama (konteks dipertahankan)
+curl -X POST localhost:8000/api/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"jelaskan lebih detail","session_id":"demo"}'
+
+# 3) satu modul saja: sentimen
 curl -X POST localhost:8000/api/nlp/sentiment \
   -H 'Content-Type: application/json' \
   -d '{"text":"Pelayanannya bagus tapi pengirimannya lambat banget"}'
+
+# 4) analisis lengkap
+curl -X POST localhost:8000/api/nlp/analyze \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"PT Maju Jaya di Bandung, hubungi budi@mail.com sebelum 12/03/2025"}'
+
+# 5) hapus riwayat sesi (privasi)
+curl -X DELETE localhost:8000/api/memory/demo
 ```
+
+Semua endpoint sekaligus ada di
+[`examples/curl_cheatsheet.sh`](examples/curl_cheatsheet.sh) (22 seksi,
+sudah dijalankan terhadap server hidup).
 
 ### Python
 
@@ -169,30 +239,91 @@ curl -X POST localhost:8000/api/nlp/sentiment \
 import requests
 
 BASE = "http://localhost:8000"
+HEADERS = {"Content-Type": "application/json"}
+# Bila CHATGANGS_REQUIRE_API_KEY=true:
+# HEADERS["X-API-Key"] = "kunci-anda"
 
-chat = requests.post(f"{BASE}/api/chat", json={
+# percakapan sadar konteks
+chat = requests.post(f"{BASE}/api/chat", headers=HEADERS, json={
     "message": "Siapa kamu?", "session_id": "demo"
 }).json()
 print(chat["reply"])
 
-analysis = requests.post(f"{BASE}/api/nlp/analyze", json={
+followup = requests.post(f"{BASE}/api/chat", headers=HEADERS, json={
+    "message": "jelaskan lebih detail", "session_id": "demo"
+}).json()
+print(followup["context"]["is_followup"], followup["reply"])
+
+# analisis lengkap
+analysis = requests.post(f"{BASE}/api/nlp/analyze", headers=HEADERS, json={
     "text": "PT Maju Jaya di Bandung, hubungi budi@mail.com sebelum 12/03/2025"
 }).json()
-print(analysis["entities"])
+print([(e["text"], e["label"]) for e in analysis["entities"]])
+
+# tanya knowledge base
+qa = requests.post(f"{BASE}/api/nlp/qa", headers=HEADERS, json={
+    "question": "bagaimana cara memakai api"
+}).json()
+print(qa["answered"], qa["answer"][:80])
 ```
 
-Contoh lengkap: [`examples/python_client.py`](examples/python_client.py),
-[`examples/javascript_client.js`](examples/javascript_client.js),
-[`examples/curl_cheatsheet.sh`](examples/curl_cheatsheet.sh).
+Klien siap pakai (dengan penanganan error & semua endpoint):
+[`examples/python_client.py`](examples/python_client.py) ·
+[`examples/javascript_client.js`](examples/javascript_client.js).
+Jalankan: `python examples/python_client.py`.
 
-### Sebagai library (tanpa HTTP)
+### JavaScript / browser
+
+```javascript
+const res = await fetch("http://localhost:8000/api/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message: "berapa harganya?", session_id: "web-1" }),
+});
+const data = await res.json();
+console.log(data.reply, data.intent.name);
+```
+
+Jika web client di-host terpisah dari API, set host API sebelum `app.js`:
+
+```html
+<script>window.CHATGANGS_API_BASE = "https://api.contoh.com";</script>
+```
+
+### Sebagai library Python (tanpa HTTP)
 
 ```python
 from chatgangs.core.pipeline import get_engine
 
 engine = get_engine()
 print(engine.analyze("layanan sangat buruk").sentiment["label"])   # negative
+print(engine.analyze("film horor laris").classification["topic"])  # hiburan
 print(engine.chat("halo", session_id="local").reply)
+```
+
+Modul tunggal juga bisa dipakai langsung:
+
+```python
+from chatgangs.core.tokenizer import get_tokenizer
+from chatgangs.core.stemmer import get_stemmer
+from chatgangs.core.sentiment import get_sentiment_analyzer
+
+print([t.text for t in get_tokenizer().tokenize("Halo dunia!")])   # ['Halo', 'dunia', '!']
+print(get_stemmer().stem("pengirimannya", "id"))                   # kirim
+print(get_sentiment_analyzer().analyze("bagus tapi lambat").label) # negative
+```
+
+### Autentikasi (opsional)
+
+```bash
+# aktifkan di .env
+CHATGANGS_REQUIRE_API_KEY=true
+CHATGANGS_API_KEYS=kunci-rahasia-panjang
+
+curl -X POST localhost:8000/api/chat \
+  -H 'X-API-Key: kunci-rahasia-panjang' \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"halo"}'
 ```
 
 ---

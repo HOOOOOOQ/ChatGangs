@@ -5,6 +5,38 @@ import pytest
 from chatgangs.core.intent import IntentDetector, get_intent_detector
 
 
+def test_rules_work_without_trained_model(tmp_path, monkeypatch):
+    """A fresh clone has no model artefacts: rules + fuzzy must still be sane.
+
+    Regression: containment-based fuzzy scoring let a two-word example
+    ("bagus sekali") beat the real complaint rule on an eleven-word sentence.
+    """
+    from chatgangs.core.intent import IntentDetector
+
+    monkeypatch.setenv("CHATGANGS_MODELS_DIR", str(tmp_path / "models"))
+    from chatgangs.config import get_settings
+
+    get_settings.cache_clear()
+    detector = IntentDetector()
+    assert detector.model_available is False
+
+    expected = [
+        ("Pelayanan PT Maju Jaya bagus tapi pengirimannya lambat.", "complaint"),
+        ("bagus sekali", "feedback_positive"),
+        ("produk bagus", "feedback_positive"),
+        ("pengiriman lambat", "complaint"),
+        ("barang rusak", "complaint"),
+        ("halo", "greeting"),
+        ("berapa harganya?", "pricing"),
+        ("terima kasih banyak", "gratitude"),
+        ("mohon bantu saya", "help"),
+        ("aplikasi ini error terus", "complaint"),
+    ]
+    for text, intent in expected:
+        result = detector.detect(text, "id")
+        assert result.name == intent, (text, result.to_dict())
+
+
 @pytest.mark.parametrize(
     "text,expected",
     [
