@@ -1,0 +1,58 @@
+{
+  "task": "sentiment",
+  "version": "20261116.021134",
+  "trained_at": "2026-11-16T02:11:34Z",
+  "dataset_size": 362,
+  "label_distribution": {
+    "positive": 133,
+    "negative": 126,
+    "neutral": 103
+  },
+  "metrics": {
+    "validation_accuracy": 0.8082,
+    "validation_macro_f1": 0.8123,
+    "validation_weighted_f1": 0.8044,
+    "train_accuracy": 1.0,
+    "cross_validation": {
+      "folds": 5,
+      "scoring": "f1_macro",
+      "scores": [
+        0.8302,
+        0.7579,
+        0.7068,
+        0.8195,
+        0.715
+      ],
+      "mean": 0.7659,
+      "std": 0.0513
+    },
+    "confusion_matrix": {
+      "labels": [
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "matrix": [
+        [
+          21,
+          0,
+          4
+        ],
+        [
+          0,
+          20,
+          1
+        ],
+        [
+          6,
+          3,
+          18
+        ]
+      ]
+    },
+    "validation_size": 73,
+    "train_size": 289
+  },
+  "algorithm": "tfidf(word+char-ngram)+logistic-regression",
+  "duration_seconds": 4.09
+}

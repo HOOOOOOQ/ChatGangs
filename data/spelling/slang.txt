@@ -1,0 +1,143 @@
+# Slang / informal → formal normalisation dictionary.
+# Used by the TextNormalizer before tokenisation. Format: informal<TAB>formal
+# Lines starting with '#' are comments.
+# ---------------------------------------------------------------- Indonesian
+gw	saya
+gua	saya
+ane	saya
+sy	saya
+bs	bisa
+bsr	besar
+bgs	bagus
+bgt	banget
+bgmn	bagaimana
+gmn	bagaimana
+gimana	bagaimana
+knp	kenapa
+napa	kenapa
+ngga	tidak
+nggak	tidak
+ngak	tidak
+gak	tidak
+ga	tidak
+gk	tidak
+tdk	tidak
+gada	tidak ada
+gaada	tidak ada
+udah	sudah
+udh	sudah
+sdh	sudah
+dah	sudah
+blm	belum
+blum	belum
+kl	kalau
+kalo	kalau
+klo	kalau
+jg	juga
+trs	terus
+trus	terus
+bkn	bukan
+dr	dari
+dgn	dengan
+utk	untuk
+krn	karena
+krna	karena
+tp	tetapi
+tpi	tetapi
+sm	dengan
+bsk	besok
+skrg	sekarang
+skrng	sekarang
+tgl	tanggal
+dll	dan lain-lain
+dsb	dan sebagainya
+tsb	tersebut
+tlg	tolong
+bgtu	begitu
+gitu	begitu
+kyk	seperti
+kayak	seperti
+spt	seperti
+jd	jadi
+jdi	jadi
+aja	saja
+doang	saja
+dpt	dapat
+dapet	dapat
+td	tadi
+gimna	bagaimana
+brp	berapa
+dmn	dimana
+kpn	kapan
+sapa	siapa
+makasih	terima kasih
+makasi	terima kasih
+trims	terima kasih
+tq	terima kasih
+pls	tolong
+plz	tolong
+gpp	tidak apa-apa
+gapapa	tidak apa-apa
+bener	benar
+bnr	benar
+sbnrnya	sebenarnya
+mksd	maksud
+hp	telepon genggam
+wa	whatsapp
+yt	youtube
+ig	instagram
+fb	facebook
+wkwk	tertawa
+wkwkwk	tertawa
+hehe	tertawa
+haha	tertawa
+lol	tertawa
+yg	yang
+utk	untuk
+tdk	tidak
+sdg	sedang
+sdh	sudah
+nm	nama
+org	orang
+org2	orang-orang
+kalo	kalau
+tau	tahu
+twh	tertawa
+# ------------------------------------------------------------------- English
+u	you
+ur	your
+r	are
+pls	please
+plz	please
+thx	thanks
+ty	thanks
+cuz	because
+coz	because
+gonna	going to
+wanna	want to
+gotta	got to
+kinda	kind of
+ppl	people
+btw	by the way
+imo	in my opinion
+idk	i do not know
+dunno	do not know
+msg	message
+cant	cannot
+dont	do not
+doesnt	does not
+didnt	did not
+isnt	is not
+arent	are not
+wasnt	was not
+werent	were not
+wont	will not
+wouldnt	would not
+shouldnt	should not
+couldnt	could not
+ive	i have
+im	i am
+youre	you are
+theyre	they are
+thats	that is
+its	it is

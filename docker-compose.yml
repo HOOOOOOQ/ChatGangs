@@ -1,0 +1,65 @@
+# ChatGangs — local development stack.
+#
+#   docker compose up --build                 → API + web client on :8000
+#   docker compose --profile postgres up -d   → adds PostgreSQL on :5432
+#
+# To use PostgreSQL for the API, set in your shell/.env:
+#   CHATGANGS_DATABASE_URL=postgresql+psycopg2://chatgangs:chatgangs@postgres:5432/chatgangs
+# (and install psycopg2-binary, which the image includes when EXTRAS are enabled)
+
+services:
+  api:
+    build:
+      context: .
+      args:
+        INSTALL_EXTRAS: "1"
+    image: chatgangs:latest
+    container_name: chatgangs-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      CHATGANGS_ENVIRONMENT: production
+      CHATGANGS_DATABASE_URL: ${CHATGANGS_DATABASE_URL:-sqlite:////app/data/chatgangs.db}
+      CHATGANGS_MEMORY_PERSIST: "true"
+      CHATGANGS_MEMORY_TTL_HOURS: "72"
+      CHATGANGS_RATE_LIMIT_REQUESTS: "120"
+      CHATGANGS_RATE_LIMIT_WINDOW_SECONDS: "60"
+      CHATGANGS_API_KEYS: ${CHATGANGS_API_KEYS:-}
+      CHATGANGS_REQUIRE_API_KEY: ${CHATGANGS_REQUIRE_API_KEY:-false}
+      CHATGANGS_LOG_JSON: "true"
+      CHATGANGS_LOG_LEVEL: info
+      CHATGANGS_CORS_ORIGINS: ${CHATGANGS_CORS_ORIGINS:-*}
+      CHATGANGS_TRUST_FORWARDED_FOR: "true"
+    volumes:
+      - chatgangs-data:/app/data
+      - ./models:/app/models:z
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: chatgangs-postgres
+    restart: unless-stopped
+    profiles: ["postgres"]
+    environment:
+      POSTGRES_USER: chatgangs
+      POSTGRES_PASSWORD: chatgangs
+      POSTGRES_DB: chatgangs
+    ports:
+      - "5432:5432"
+    volumes:
+      - chatgangs-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chatgangs"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  chatgangs-data:
+  chatgangs-pg:

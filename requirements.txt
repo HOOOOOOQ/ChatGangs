@@ -1,0 +1,40 @@
+# ChatGangs — runtime dependencies
+# Python 3.11+
+#
+# Core API
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.27,<1.0
+pydantic>=2.6,<3.0
+pydantic-settings>=2.2,<3.0
+python-dotenv>=1.0
+python-multipart>=0.0.9
+
+# Numerics / machine learning (used by the training pipeline and models)
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.4,<2.0
+joblib>=1.3
+
+# Persistence
+SQLAlchemy>=2.0,<3.0
+# PostgreSQL driver for deployment (uncomment in production)
+# psycopg2-binary>=2.9
+
+# ---------------------------------------------------------------------------
+# Optional NLP enhancers. ChatGangs runs without them (it reports the
+# fallback backends in GET /api/model/info) but they raise quality:
+#
+#   Sastrawi    – Indonesian stemmer (CHATGANGS_STEMMER_BACKEND=sastrawi|auto)
+#   PyStemmer   – Snowball stemmer for Spanish/German/French
+#   langdetect  – statistical language detection assist
+#   spaCy       – POS, dependency parsing and statistical NER
+#
+# Sastrawi>=1.0.1
+# PyStemmer>=2.2.0
+# langdetect>=1.0.9
+# spacy>=3.7,<4.0
+#   then: python -m spacy download en_core_web_sm
+#
+# Optional transformer stack (not required, not claimed as active):
+# transformers>=4.40
+# sentence-transformers>=2.7

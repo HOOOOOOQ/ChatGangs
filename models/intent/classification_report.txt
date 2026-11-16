@@ -1,0 +1,22 @@
+                   precision    recall  f1-score   support
+
+     analyze_text       0.83      1.00      0.91         5
+         api_help       1.00      0.60      0.75         5
+     capabilities       0.80      0.80      0.80         5
+        complaint       0.67      0.40      0.50         5
+         farewell       0.80      0.67      0.73         6
+feedback_positive       0.57      0.80      0.67         5
+        gratitude       1.00      1.00      1.00         5
+         greeting       0.78      0.88      0.82         8
+             help       1.00      0.50      0.67         4
+         identity       0.50      0.80      0.62         5
+          pricing       1.00      1.00      1.00         4
+          privacy       1.00      1.00      1.00         5
+         question       0.60      0.75      0.67         4
+       small_talk       0.50      0.40      0.44         5
+    training_help       1.00      1.00      1.00         4
+        translate       1.00      1.00      1.00         4
+
+         accuracy                           0.78        79
+        macro avg       0.82      0.79      0.79        79
+     weighted avg       0.81      0.78      0.78        79

@@ -1,0 +1,151 @@
+# Sentiment lexicon — Indonesian
+# Format: token<TAB>polarity (positive = good), sections select the weight table.
+[positive]
+bagus	0.8
+baik	0.7
+hebat	0.9
+luar biasa	0.95
+keren	0.85
+mantap	0.85
+sempurna	0.9
+senang	0.8
+bahagia	0.85
+gembira	0.8
+suka	0.6
+cinta	0.8
+sayang	0.6
+terima kasih	0.7
+bermanfaat	0.7
+membantu	0.6
+mudah	0.5
+cepat	0.5
+murah	0.4
+puas	0.7
+memuaskan	0.75
+berhasil	0.8
+sukses	0.8
+menarik	0.6
+indah	0.7
+nyaman	0.68
+aman	0.6
+stabil	0.55
+cerdas	0.7
+pintar	0.7
+ramah	0.7
+sopan	0.65
+jujur	0.7
+tepat	0.6
+akurat	0.65
+jelas	0.5
+lengkap	0.6
+rapi	0.55
+berguna	0.6
+enak	0.55
+lembut	0.55
+manis	0.55
+profesional	0.7
+berkualitas	0.75
+mengesankan	0.8
+menyenangkan	0.75
+luarbiasa	0.9
+recommended	0.75
+top	0.6
+oke	0.45
+ok	0.45
+sip	0.5
+asik	0.6
+asyik	0.6
+kualitas	0.4
+berhasil sekali	0.85
+[negative]
+buruk	-0.8
+jelek	-0.8
+jahat	-0.85
+salah	-0.6
+gagal	-0.75
+rusak	-0.7
+lambat	-0.55
+mahal	-0.4
+bodoh	-0.8
+bocor	-0.6
+kecewa	-0.8
+sedih	-0.7
+marah	-0.8
+benci	-0.85
+takut	-0.6
+cemas	-0.6
+khawatir	-0.55
+sulit	-0.5
+susah	-0.55
+rumit	-0.5
+bermasalah	-0.7
+masalah	-0.45
+error	-0.7
+bug	-0.6
+crash	-0.75
+kacau	-0.7
+hancur	-0.85
+mengganggu	-0.6
+bohong	-0.85
+dusta	-0.8
+curang	-0.8
+penipuan	-0.85
+merugikan	-0.7
+berbahaya	-0.75
+kotor	-0.6
+bau	-0.5
+berisik	-0.5
+malas	-0.5
+males	-0.5
+capek	-0.5
+lelah	-0.5
+pusing	-0.45
+sebel	-0.65
+kesal	-0.7
+jengkel	-0.7
+muak	-0.8
+frustrasi	-0.75
+frustasi	-0.75
+sampah	-0.7
+payah	-0.6
+parah	-0.75
+menyebalkan	-0.75
+menyesal	-0.7
+membosankan	-0.6
+tidak stabil	-0.7
+tidak berguna	-0.75
+tidak membantu	-0.7
+tidak jelas	-0.55
+tidak akurat	-0.7
+gagal total	-0.85
+lambat sekali	-0.7
+[negation]
+tidak	-1.0
+tak	-1.0
+bukan	-1.0
+belum	-1.0
+jangan	-1.0
+tanpa	-1.0
+nggak	-1.0
+ngak	-1.0
+gak	-1.0
+ga	-1.0
+enggak	-1.0
+engga	-1.0
+kagak	-1.0
+[diminishers]
+agak	0.5
+sedikit	0.4
+kurang	0.5
+cukup	0.7
+lumayan	0.6
+[amplifiers]
+sangat	1.5
+sekali	1.4
+banget	1.6
+amat	1.4
+terlalu	1.5
+benar-benar	1.4
+sungguh	1.4
+paling	1.5
+super	1.6

@@ -1,0 +1,34 @@
+# Indonesian root-word vocabulary used by the word-boundary-safe stemmer.
+# One root per line; lines starting with '#' are ignored.
+ada ajar akal akar aksi aktif alih alir aman ambil analisis angkat antar apa arah arti asal asing atas
+atur awal ayam babak badan bagian bahan bawah bayi bebas belajar beban benar bentuk bensin berat beri
+bersih besar biaya bicara bijak bila bimbing bina bintang bisa bola buah budaya buka bumbu bunga baca
+bantu bangun bank barang baru basah batas bawa bayar beku beli bengkel bentang berhenti berti betul
+bicara bikin bilangan birokrasi biskuit bongkar borong buang buat buku bulan bulat bumi bungkus buru buruk
+cabut cahaya cair cakap calon campur cari catat cegah cek cepat cerah cerita cinta cocok colok contoh
+cuci cukup curiga daerah dapat dasar datang daya dedikasi dekat deklarasi dengar desain didik diri diskusi
+donasi duduk dunia efektif ekspor faktor gaji gambar ganti gaya gedung gelar gizi guna gurih hadir harga
+hasil hati hebat henti hidup hilang hitung hormat hujan hukum hulu hubungan hutan ikut ilmu impor indah
+informasi ingat ingin inovasi inspeksi jadi jalan jamin jelas jenis jumlah jual jujur kalah kali kalah
+kamar kapan karya kaya keadaan kebijakan kecil kedai kembang kena kerja khusus kilat kirim kisah kjk
+kolektif komunikasi koneksi konsumsi kontrak kontrol kopi kosong kota kotor kreatif krisis kuasai kualitas
+kumpul kurang usaha laba lainnya lama lambat lancar langganan langsung lapor larang layan layak lebih
+legend lekat lemah lembut lengkap lindung lihat lingkungan lolos luar lulus lupa madu maju makan malam
+mampu mana mandi manfaat manusia masalah masih masuk masa mata maya meja melarat melalui main mulai
+tempat
+alam nama nyaman obat oleh orang lainnya pada paham pakai pihak panas pandang pasar pasti patuh pegang
+pilih pintar produk program proyek proses puas pulang punya pusat rasa rapi rapat rilis ruang rugi
+rumah rumit sabar salah sama sampai samping sangat santai saran sarana satu sayang saya sedang sejarah
+sehat sekitar selama sendiri senang sengaja seni sebut serah serius sertifikat sesi sesuai setuju
+siap sibuk sisa sistem sosial stabil strategi suara sudah suka sumber sungguh surat susah sukses
+tahu tahun takut tangan tampil tanya tawar tegas teknik tenaga tentang tepat tiba tinggal tinggi tipe
+toko tinggi tinggal tukar tuju tujuan tumbuh tulis uang ubah ucap uji ukur umum undang unggul usaha
+utama wajar wajib waktu waris warna wilayah wisata yakin ziarah
+tulis pukul ambil tunjuk analisis guna kerja main jalan bantu
+sapu bagus rajin hemat cermat sopan salah benar lapor keluh tahun milik rasa tahu
+tulis pukul ambil tunjuk analisis guna kerja main jalan bantu kirim masak pilih tari teliti bawa
+layan tanya makan ajar sehat uang jual bersih belajar baik tumbuh bantu kerja kecewa kualitas
+temu giat guna ambil kerja
+minum muncul pesan pergi penting penuh pendapat pemilik pelihara baca jadi menang menuju mereka
+ikut jelas jumlah lainnya tanggal tinggi tinggal tumbuh ubah ucap uji ukur umum undang unggul
+kemarin kualitas pukul tulis
