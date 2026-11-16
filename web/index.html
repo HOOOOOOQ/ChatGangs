@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChatGangs — NLP Engine</title>
+  <meta name="description" content="ChatGangs: modular NLP and conversational AI engine with real tokenization, intent detection, sentiment analysis, NER and context-aware dialogue." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/app/css/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ---------------------------------------------------------- sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">CG</div>
+        <div>
+          <div class="brand-name">ChatGangs</div>
+          <div class="brand-sub">NLP Engine v1.0</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="chat">
+          <span class="nav-ico">💬</span><span>Percakapan</span>
+        </button>
+        <button class="nav-item" data-view="analyzer">
+          <span class="nav-ico">🔎</span><span>Analisis Teks</span>
+        </button>
+        <button class="nav-item" data-view="models">
+          <span class="nav-ico">⚙️</span><span>Model & Sistem</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-pill" id="health-pill">
+          <span class="dot" id="health-dot"></span>
+          <span id="health-text">memeriksa…</span>
+        </div>
+        <a class="link" href="/docs" target="_blank" rel="noopener">API Docs ↗</a>
+        <button class="link danger" id="btn-new-session">Sesi baru</button>
+        <button class="link" id="btn-delete-session">Hapus riwayat sesi</button>
+      </div>
+    </aside>
+
+    <!-- ------------------------------------------------------------ chat -->
+    <main class="main">
+      <section class="view active" id="view-chat">
+        <header class="view-header">
+          <div>
+            <h1>Percakapan</h1>
+            <p class="muted">Context-aware · memory-aware · 8 bahasa</p>
+          </div>
+          <div class="session-tag">sesi <code id="session-label">—</code></div>
+        </header>
+
+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
+
+        <div class="suggestions" id="suggestions"></div>
+
+        <form class="composer" id="chat-form">
+          <textarea id="chat-input" rows="1" placeholder="Tulis pesan… (Enter untuk kirim, Shift+Enter untuk baris baru)"
+                    maxlength="2000" required></textarea>
+          <button type="submit" id="send-btn" aria-label="Kirim">Kirim</button>
+        </form>
+        <p class="fineprint">Riwayat disimpan per sesi dan dapat dihapus kapan saja.</p>
+      </section>
+
+      <!-- -------------------------------------------------------- analyzer -->
+      <section class="view" id="view-analyzer">
+        <header class="view-header">
+          <div>
+            <h1>Analisis Teks</h1>
+            <p class="muted">Tokenisasi · NER · Intent · Sentimen · Klasifikasi · QA</p>
+          </div>
+          <div class="session-tag"><button class="chip" id="btn-example">Contoh teks</button></div>
+        </header>
+
+        <form class="analyzer-form" id="analyze-form">
+          <textarea id="analyze-input" rows="4" maxlength="4000"
+            placeholder="Tempel teks untuk dianalisis, mis. &ldquo;Pesanan saya dari PT Maju Jaya terlambat 3 hari. Tolong hubungi budi@mail.com sebelum 12/03/2025.&rdquo;"></textarea>
+          <div class="analyzer-actions">
+            <button type="submit" id="analyze-btn">Analisis</button>
+            <span class="muted" id="analyze-meta"></span>
+          </div>
+        </form>
+
+        <div class="results" id="analyze-results"></div>
+      </section>
+
+      <!-- ---------------------------------------------------------- models -->
+      <section class="view" id="view-models">
+        <header class="view-header">
+          <div>
+            <h1>Model &amp; Sistem</h1>
+            <p class="muted">Backend nyata, metrik training, dan status runtime</p>
+          </div>
+          <button class="chip" id="btn-refresh-models">Muat ulang</button>
+        </header>
+        <div id="models-content" class="results"></div>
+      </section>
+    </main>
+  </div>
+  <script src="/app/js/app.js"></script>
+</body>
+</html>

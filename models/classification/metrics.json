@@ -1,0 +1,82 @@
+{
+  "task": "classification",
+  "version": "20261116.021351",
+  "trained_at": "2026-11-16T02:13:51Z",
+  "dataset_size": 222,
+  "label_distribution": {
+    "teknologi": 46,
+    "hiburan": 45,
+    "pendidikan": 45,
+    "bisnis": 44,
+    "kesehatan": 42
+  },
+  "metrics": {
+    "validation_accuracy": 0.8636,
+    "validation_macro_f1": 0.8556,
+    "validation_weighted_f1": 0.8551,
+    "train_accuracy": 1.0,
+    "cross_validation": {
+      "folds": 5,
+      "scoring": "f1_macro",
+      "scores": [
+        0.6878,
+        0.5554,
+        0.6967,
+        0.7691,
+        0.7698
+      ],
+      "mean": 0.6958,
+      "std": 0.0783
+    },
+    "confusion_matrix": {
+      "labels": [
+        "bisnis",
+        "hiburan",
+        "kesehatan",
+        "pendidikan",
+        "teknologi"
+      ],
+      "matrix": [
+        [
+          8,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          9,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          2,
+          5
+        ]
+      ]
+    },
+    "validation_size": 44,
+    "train_size": 178
+  },
+  "algorithm": "tfidf(word+char-ngram)+logistic-regression",
+  "duration_seconds": 4.94
+}

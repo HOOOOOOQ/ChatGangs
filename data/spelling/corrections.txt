@@ -1,0 +1,117 @@
+# Correction dictionary for common typos (both languages).
+# Applied only when the (normalised) word is not part of the known vocabulary.
+# Format: misspelling<TAB>correction
+# ---------------------------------------------------------------- Indonesian
+bagaimna	bagaimana
+bagaiman	bagaimana
+bagiamana	bagaimana
+bagaimaan	bagaimana
+bgaimana	bagaimana
+terimakasih	terima kasih
+terimakasi	terima kasih
+trimakasih	terima kasih
+makasi	terima kasih
+makasih	terima kasih
+tolng	tolong
+tolongg	tolong
+mohonn	mohon
+bantuu	bantu
+membntu	membantu
+membantu	membantu
+senag	senang
+sennag	senang
+seneng	senang
+sedihh	sedih
+marahh	marah
+kecewaa	kecewa
+baguss	bagus
+bagu	bagus
+kerenn	keren
+hebattt	hebat
+mantapp	mantap
+jelekk	jelek
+burukk	buruk
+susahh	susah
+sulitt	sulit
+cepaat	cepat
+lambatt	lambat
+mahall	mahal
+murahh	murah
+cantikk	cantik
+indahh	indah
+nyamann	nyaman
+amann	aman
+jelass	jelas
+lengkapp	lengkap
+akurattt	akurat
+teppat	tepat
+salaah	salah
+gagall	gagal
+rusakk	rusak
+masalahh	masalah
+bingung	bingung
+membingungkan	membingungkan
+# ------------------------------------------------------------------- English
+baegus	bagus
+helo	hello
+hii	hi
+hiii	hi
+helloo	hello
+heloo	hello
+thankyou	thank you
+thsnks	thanks
+thnaks	thanks
+the	the
+beleive	believe
+recieve	receive
+seperate	separate
+definately	definitely
+occured	occurred
+accomodate	accommodate
+adress	address
+arguement	argument
+begining	beginning
+calender	calendar
+comming	coming
+existance	existence
+goverment	government
+independant	independent
+occassion	occasion
+priviledge	privilege
+realy	really
+succesful	successful
+untill	until
+wierd	weird
+writting	writing
+wonderfull	wonderful
+beautifull	beautiful
+greatt	great
+goood	good
+gooood	good
+bad	bad
+terible	terrible
+horibel	horrible
+amazng	amazing
+awsome	awesome
+helpfull	helpful
+usefull	useful
+sloww	slow
+fasst	fast
+expensiv	expensive
+cheep	cheap
+brokn	broken
+eror	error
+probem	problem
+questoin	question
+answr	answer
+langauge	language
+indonesan	indonesian
+englsh	english
+sentimen	sentiment
+analisis	analisis
+analize	analyze
+analyse	analyze
+tokn	token
+tokenn	token
+intnet	intent
+entitas	entitas

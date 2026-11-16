@@ -1,0 +1,11 @@
+              precision    recall  f1-score   support
+
+      bisnis       0.89      0.89      0.89         9
+     hiburan       0.90      1.00      0.95         9
+   kesehatan       0.88      0.88      0.88         8
+  pendidikan       0.82      1.00      0.90         9
+   teknologi       0.83      0.56      0.67         9
+
+    accuracy                           0.86        44
+   macro avg       0.86      0.86      0.86        44
+weighted avg       0.86      0.86      0.86        44

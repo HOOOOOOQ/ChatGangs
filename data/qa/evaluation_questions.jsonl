@@ -1,0 +1,30 @@
+{"question": "siapa kamu", "expected": "kb.identity"}
+{"question": "apa itu chatgangs", "expected": "kb.identity"}
+{"question": "kamu bisa apa saja", "expected": "kb.capabilities"}
+{"question": "bagaimana cara memakai api", "expected": "kb.api"}
+{"question": "endpoint apa saja yang tersedia", "expected": "kb.api"}
+{"question": "model apa yang kamu gunakan", "expected": "kb.models"}
+{"question": "apakah kamu gpt", "expected": "kb.models"}
+{"question": "apakah data saya disimpan", "expected": "kb.privacy"}
+{"question": "bagaimana cara menghapus riwayat", "expected": "kb.privacy"}
+{"question": "bisa bahasa apa saja", "expected": "kb.languages"}
+{"question": "apa itu nlp", "expected": "kb.nlp"}
+{"question": "jelaskan natural language processing", "expected": "kb.nlp"}
+{"question": "apa kegunaan sistem ini", "expected": "kb.services"}
+{"question": "cara install dong", "expected": "kb.deploy"}
+{"question": "apakah ada docker", "expected": "kb.deploy"}
+{"question": "apakah bisa training", "expected": "kb.training"}
+{"question": "berapa harganya", "expected": "kb.pricing"}
+{"question": "apakah gratis", "expected": "kb.pricing"}
+{"question": "bagaimana cara lapor bug", "expected": "kb.contact_support"}
+{"question": "apa rencana ke depan", "expected": "kb.roadmap"}
+{"question": "bagaimana integrasi dengan aplikasi saya", "expected": "kb.integration"}
+{"question": "apakah sistem ini aman", "expected": "kb.security"}
+{"question": "bagaimana memori percakapan bekerja", "expected": "kb.memory"}
+{"question": "halo", "expected": "kb.greeting"}
+{"question": "terima kasih", "expected": "kb.thanks"}
+{"question": "bagaimana cara menghubungi tim", "expected": "kb.contact"}
+{"question": "apa kelemahan sistem ini", "expected": "kb.limits"}
+{"question": "what can you do", "expected": "kb.en.capabilities"}
+{"question": "how do i call the api", "expected": "kb.en.api"}
+{"question": "how does sentiment analysis work", "expected": "kb.en.sentiment"}
