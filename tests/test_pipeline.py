@@ -91,6 +91,17 @@ def test_privacy_answer_renders_without_placeholder_errors(engine):
     assert "session_id}" in response.reply
 
 
+def test_complaint_reply_does_not_repeat_apologies(engine):
+    """Regression: opener + template both apologised ("Maaf ... Mohon maaf")."""
+    session_id = "pipe-" + uuid.uuid4().hex[:8]
+    for _ in range(4):
+        response = engine.chat("pengiriman lambat", session_id=session_id)
+        assert response.intent["name"] == "complaint"
+        lowered = response.reply.lower()
+        assert lowered.count("maaf") <= 1, response.reply
+        assert "tidaknyamanannya" not in lowered
+
+
 def test_chat_language_adaptation(engine):
     session_id = "pipe-" + uuid.uuid4().hex[:8]
     response = engine.chat("hello, what can you do?", session_id=session_id)

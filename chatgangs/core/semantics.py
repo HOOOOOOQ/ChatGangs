@@ -400,18 +400,18 @@ class ClassificationResult:
                 self.scores.items(), key=lambda kv: kv[1], reverse=True)},
             "rationale": self.rationale,
         }
-        if self.speech_act:
-            data["speech_act"] = self.speech_act
-            data["speech_act_scores"] = {
-                k: round(v, 4) for k, v in sorted(
-                    self.speech_act_scores.items(), key=lambda kv: kv[1], reverse=True)
-            }
-        if self.topic:
-            data["topic"] = self.topic
-            data["topic_scores"] = {
-                k: round(v, 4) for k, v in sorted(
-                    self.topic_scores.items(), key=lambda kv: kv[1], reverse=True)
-            }
+        # Both views are always present so clients can rely on the shape:
+        # ``topic`` is null when no topic model has been trained.
+        data["speech_act"] = self.speech_act
+        data["speech_act_scores"] = {
+            k: round(v, 4) for k, v in sorted(
+                self.speech_act_scores.items(), key=lambda kv: kv[1], reverse=True)
+        }
+        data["topic"] = self.topic
+        data["topic_scores"] = {
+            k: round(v, 4) for k, v in sorted(
+                self.topic_scores.items(), key=lambda kv: kv[1], reverse=True)
+        }
         return data
 
 

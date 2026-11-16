@@ -240,6 +240,11 @@ Dua jenis label yang **tidak dicampur**:
 `task` memilih keluaran: `auto` (default, label = speech-act + topik
 menyertai), `topic` (paksa model topik), `speech_act` (hanya taksonomi).
 
+Bentuk respons **selalu sama**: field `speech_act`, `speech_act_scores`,
+`topic`, dan `topic_scores` selalu ada. `topic` bernilai `null` bila belum ada
+artefak model topik (mis. setelah clone baru sebelum `scripts.train`) —
+klien tidak perlu menebak ada/tidaknya field.
+
 ```json
 {"text": "Tolong jelaskan cara kerja sistem ini"}
 ```
